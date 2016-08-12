@@ -19,3 +19,4 @@ class VehicleModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = VehicleModel
         fields = ('id', 'model_name')
+

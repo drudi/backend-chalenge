@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^models/(?P<pk>[0-9])/?$', views.VehicleModelDetail.as_view()),
     url(r'^manufacturers/?$', views.ManufacturerList.as_view()),
     url(r'^manufacturers/(?P<pk>[0-9])/?$', views.ManufacturerDetail.as_view()),
+    url(r'^vehicles/search/?$', views.SearchList.as_view()),
 ]
