@@ -13,8 +13,7 @@ def filter_by_request(request_args):
     """
     queryset = Vehicle.objects.all()
     found = False
-    for key in request_args:
-        term = request_args[key]
+    for (key, term) in request_args.items():
         if key == 'type':
             queryset = queryset.filter(vehicle_type__type_slug=term)
             found = True
