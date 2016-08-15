@@ -78,14 +78,11 @@ WSGI_APPLICATION = 'vehiclemanager.wsgi.application'
 DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",
-        "HOST": '127.0.0.1',
+        "HOST": 'db',
         "NAME": 'vehicles_api',
         "PASSWORD": "vivadecora",
         "PORT": "3306",
         "USER": "root",
-        "TEST": {
-            "NAME": "db.sqlite3",
-        },
     },
 }
 

@@ -23,8 +23,8 @@ class VehicleTests(TestCase):
                 color=self.color,
                 vehicle_type=self.vehicle_type,
                 model=self.model,
-                kms=500,
-                engine=0.200,
+                kms=500000,
+                engine=0.049,
             )
         self.assertRaises(ValueError, vehicle.save)
 
@@ -37,7 +37,7 @@ class VehicleTests(TestCase):
                 color=self.color,
                 vehicle_type=self.vehicle_type,
                 model=self.model,
-                kms=500,
+                kms=500000,
                 engine=0.200,
             )
         self.assertIsInstance(vehicle, Vehicle)
@@ -45,10 +45,10 @@ class VehicleTests(TestCase):
 # Testing the views
 class ViewTests(TestCase):
     def setUp(self):
-        self.manufacturer = Manufacturer(manufacturer_name='Yamaha')
-        self.color = VehicleColor(color_slug='branco', color_name='Branca')
-        self.vehicle_type = VehicleType(type_slug='moto', type_name='Moto')
-        self.model = VehicleModel(model_name='Tenere')
+        self.manufacturer = Manufacturer(manufacturer_name='fabrica1')
+        self.color = VehicleColor(color_slug='color1', color_name='Color1')
+        self.vehicle_type = VehicleType(type_slug='veic1', type_name='Veic1')
+        self.model = VehicleModel(model_name='Model1')
 
     def test_create_vehicle(self):
         self.manufacturer.save()
@@ -70,17 +70,18 @@ class ViewTests(TestCase):
     def _get_post_data(self):
         return json.loads( '''
                 {
-                    "manufacturer": "Yamaha",
-                    "model": "Tenere",
-                    "color": "branco",
+                    "manufacturer": "fabrica1",
+                    "model": "Model1",
+                    "color": "color1",
                     "kms": 0,
                     "engine": "0.250",
-                    "vehicle_type": "moto"
+                    "vehicle_type": "veic1"
                 }
                 '''
             )
 
 # Testing search module
+# Tests consider initial data inserted through migration
 class SearchTest(TestCase):
     def setUp(self):
         self._create_vehicle(vehicle_type='tipo1', manufacturer='fabri1',
@@ -136,15 +137,15 @@ class SearchTest(TestCase):
 
     def test_search_by_km(self):
         queryset = search.filter_by_request({'kmslte': 0})
-        self.assertEqual(queryset.count(), 2)
+        self.assertEqual(queryset.count(), 4)
         queryset = search.filter_by_request({'kmsgte': 500, 'kmslte': 1999})
-        self.assertEqual(queryset.count(), 1)
+        self.assertEqual(queryset.count(), 3)
 
     def test_search_by_engine(self):
         queryset = search.filter_by_request({'enginegte': 0.050,
                 'enginelte': 0.999
             })
-        self.assertEqual(queryset.count(), 2)
+        self.assertEqual(queryset.count(), 6)
 
     def test_search_by_invalid_key(self):
         queryset = search.filter_by_request({'invalidkey': 'invalidvalue'})

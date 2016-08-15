@@ -2,3 +2,5 @@ django
 djangorestframework
 mysqlclient
 coverage
+gunicorn
+gevent
