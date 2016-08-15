@@ -1,6 +1,26 @@
-<html>
-    <head></head>
+<!DOCTYPE html>
+<html ng-app="vehicles">
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+        <script type="text/javascript" src="javascript/angular.min.js"></script>
+        <script type="text/javascript" src="javascript/app.js"></script>
+    </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Gerenciador de Veículos</h1>
+        <div ng-controller='VehicleSearchController as search'>
+            <h1>Busca:</h1>
+            <form>
+            </form>
+            <div ng-show="search.vehicles.length" ng-repeat="vehicle in search.vehicles">
+                <ul>
+                    <li>Montadora: {{vehicle.manufacturer}}</li>
+                    <li>Modelo: {{vehicle.model}}</li>
+                    <li>Cor: {{vehicle.color}}</li>
+                    <li>Kilometragem: {{vehicle.kms}}</li>
+                    <li>Motor: {{vehicle.engine}}</li>
+                    <li>Tipo: {{vehicle.vehicle_type}}</li>
+                </ul>
+            </div>
+        </div>
     </body>
 </html>
