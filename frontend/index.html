@@ -7,16 +7,54 @@
     </head>
     <body>
         <h1>Gerenciador de Veículos</h1>
-        <div ng-controller='VehicleSearchController as search'>
-            <h1>Busca:</h1>
-            <form>
+        <div id="addForm" >
+            <h2>Adicionar Veículo</h2>
+            <form name="createVehicle" ng-controller="VehiclesAddController as vehiclesCtrl"
+                                       ng-submit="vehiclesCtrl.addVehicle()">
+                <blockquote>
+                    ID: {{vehiclesCtrl.vehicle.id}}
+                    Tipo: {{vehiclesCtrl.vehicle.vehicle_type}}
+                    Montadora: {{vehiclesCtrl.vehicle.manufacturer}}
+                    Modelo: {{vehiclesCtrl.vehicle.model}}
+                    Cor: {{vehiclesCtrl.vehicle.color}}
+                    Kilometragem: {{vehiclesCtrl.vehicle.kms}}
+                    Motor: {{vehiclesCtrl.vehicle.engine}}
+                </blockquote>
+                <label>Tipo: </label>
+                <select ng-model="vehiclesCtrl.vehicle.vehicle_type">
+                    <option value="moto">Moto</option>
+                    <option value="car">Carro</option>
+                </select>
+                <label>Montadora: </label>
+                <input type="text" ng-model="vehiclesCtrl.vehicle.manufacturer" />
+                <label>Modelo: </label>
+                <input type="text" ng-model="vehiclesCtrl.vehicle.model"/>
+                <label>Cor: </label>
+                <input type="text" ng-model="vehiclesCtrl.vehicle.color"/>
+                <label>Kilometragem: </label>
+                <input type="text" ng-model="vehiclesCtrl.vehicle.kms"/>
+                <label>Motor: </label>
+                <input type="text" ng-model="vehiclesCtrl.vehicle.engine" />
+                <input class="btn" type="submit" value="Inserir" />
             </form>
+        </div>
+        <div ng-controller='VehicleSearchController as search'>
+            <h2>Busca:</h2>
             <div ng-show="search.vehicles.length" ng-repeat="vehicle in search.vehicles">
                 <ul>
                     <li>Montadora: {{vehicle.manufacturer}}</li>
                     <li>Modelo: {{vehicle.model}}</li>
                     <li>Cor: {{vehicle.color}}</li>
-                    <li>Kilometragem: {{vehicle.kms}}</li>
+                    <li>
+                        <span ng-hide="editing" ng-click="editing = true">
+                            Kilometragem: {{vehicle.kms}}
+                        </span>
+                        <form ng-show="editing" ng-submit="editing = false">
+                            <input type="hidden" ng-model="vehicle.id" />
+                            <input type="text" ng-model="vehicle.kms" ng-required />
+                            <button class="btn" type="submit">Save</button>
+                        </form>
+                    </li>
                     <li>Motor: {{vehicle.engine}}</li>
                     <li>Tipo: {{vehicle.vehicle_type}}</li>
                 </ul>
