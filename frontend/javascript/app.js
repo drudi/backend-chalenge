@@ -288,4 +288,96 @@
         };
     });
 
+    app.directive('manufacturerForm', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/manufacturer/manufacturer-form.html',
+            controller: ['$http', function($http){
+                var ctrl = this;
+                ctrl.manufacturer = {};
+                ctrl.all = [];
+                this.submitForm = function() {
+
+                    $http.post('http://127.0.0.1:8000/manufacturers', ctrl.manufacturer)
+                        .success(function(data){
+                            ctrl.all.push(data);
+                            ctrl.manufacturer = {};
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+
+                };
+
+                this.listAll = function() {
+                    $http.get('http://127.0.0.1:8000/manufacturers')
+                        .success(function(data){
+                            ctrl.all = data;
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+                };
+
+                this.listAll();
+            }],
+            controllerAs: 'manufacturerCtrl',
+        };
+    });
+
+    app.directive('manufacturerEdit', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/manufacturer/manufacturer-edit.html',
+            link: function (scope, element, attrs) {
+               if(attrs.vehicle){
+                    scope.manuf = scrope.$eval(attrs.manuf);
+                }
+            },
+            controller: ['$http', function($http){
+                var ctrl = this;
+                this.submitForm = function(form) {
+                    $http.patch('http://127.0.0.1:8000/manufacturers/'+form.id,
+                            {manufacturer_name: form.manufacturer_name})
+                        .success(function(data){
+                            ctrl.editing = false;
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+                    this.editing = false;
+
+                };
+            }],
+            controllerAs: 'manufEditCtrl',
+        };
+    });
+
+    app.directive('manufacturerDelete', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/manufacturer/delete.html',
+            link: function (scope, element, attrs) {
+               if(attrs.vehicle){
+                    scope.manuf = scrope.$eval(attrs.manuf);
+                }
+            },
+            controller: ['$http', function($http){
+                var ctrl = this;
+                this.submitForm = function(form) {
+                    $http.delete('http://127.0.0.1:8000/manufacturers/'+form.id)
+                        .success(function(data){
+                            $('#manufacturer_'+form.id).hide();
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+
+                };
+            }],
+            controllerAs: 'manufDeleteCtrl',
+        };
+    });
+
+
 })();

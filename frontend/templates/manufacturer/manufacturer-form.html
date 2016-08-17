@@ -1,0 +1,12 @@
+<form ng-submit="manufacturerCtrl.submitForm()">
+    <label>Nome da Montadora: </label>
+    <input type="text" ng-model="manufacturerCtrl.manufacturer.manufacturer_name" />
+    <input class="btn" type="submit" value="Inserir" />
+</form>
+<h3>Lista de montadoras</h3>
+<div ng-repeat="manuf in manufacturerCtrl.all">
+    <div class="border" id="manufacturer_{{manuf.id}}">
+        <manufacturer-edit></manufacturer-edit>
+        <manufacturer-delete></manufacturer-delete>
+    </div>
+</div>

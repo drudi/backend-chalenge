@@ -1,0 +1,9 @@
+<span ng-hide="manufEditCtrl.editing" ng-click="manufEditCtrl.editing = true">
+    {{manuf.manufacturer_name}}
+</span>
+<form ng-show="manufEditCtrl.editing" ng-submit="manufEditCtrl.submitForm(manuf)">
+    <input name="id" type="hidden" ng-model="manuf.id" />
+    <input name="manufacturer" type="text" ng-model="manuf.manufacturer_name" ng-required />
+    <button class="btn" type="submit">Save</button>
+</form>
+<br />
