@@ -67,10 +67,11 @@
         addv.vehicle = {};
 
         this.addVehicle = function(){
-            //alert(addv.vehicle.model);
+            alert(JSON.stringify(addv.vehicle));
             $http.post('http://127.0.0.1:8000/vehicles', addv.vehicle)
                 .success(function(data){
-                    addv.vehicle = data;
+                    //addv.vehicle = data;
+                    addv.vehicle = {}
                 })
                 .error(function(data){
                     alert(JSON.stringify(data));
@@ -467,6 +468,50 @@
                 };
             }],
             controllerAs: 'modelDeleteCtrl',
+        };
+    });
+
+    app.directive('selectMontadoras', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/widgets/select-montadoras.html',
+            controller: ['$http', function($http){
+                var ctrl = this;
+                this.getManufacturers = function(form) {
+                    $http.get('http://127.0.0.1:8000/manufacturers/')
+                        .success(function(data){
+                            ctrl.dados = data;
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+
+                };
+                this.getManufacturers();
+            }],
+            controllerAs: 'selManufCtrl',
+        };
+    });
+
+    app.directive('selectModelos', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/widgets/select-modelos.html',
+            controller: ['$http', function($http){
+                var ctrl = this;
+                this.getModels = function(form) {
+                    $http.get('http://127.0.0.1:8000/models/')
+                        .success(function(data){
+                            ctrl.dados = data;
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+
+                };
+                this.getModels();
+            }],
+            controllerAs: 'selModelCtrl',
         };
     });
 

@@ -31,6 +31,7 @@
         </section>
         <section ng-hide=" tab != 1">
         <section>
+            <p>Cores disponíveis atualmente são: azul, preto, vermelho, branco e prata</p>
         <div id="addForm" >
             <h2>Adicionar Veículo</h2>
             <!-- Create form -->
@@ -42,10 +43,16 @@
                     <option value="moto">Moto</option>
                     <option value="car">Carro</option>
                 </select>
+                <!--
                 <label>Montadora: </label>
                 <input type="text" ng-model="vehiclesCtrl.vehicle.manufacturer" />
-                <label>Modelo: </label>
+                -->
+                <select-montadoras></select-montadoras>
+                <!--
+                 <label>Modelo: </label>
                 <input type="text" ng-model="vehiclesCtrl.vehicle.model"/>
+                -->
+                <select-modelos></select-modelos>
                 <label>Cor: </label>
                 <input type="text" ng-model="vehiclesCtrl.vehicle.color"/>
                 <label>Kilometragem: </label>

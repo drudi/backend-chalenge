@@ -1,0 +1,6 @@
+<label>Montadora: </label>
+<select ng-model="vehiclesCtrl.vehicle.manufacturer">
+    <option value="{{manufacturer.manufacturer_name}}" ng-repeat="manufacturer in selManufCtrl.dados">
+    {{manufacturer.manufacturer_name}}
+    </option>
+</select>

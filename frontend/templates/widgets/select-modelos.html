@@ -1,0 +1,6 @@
+<label>Modelo: </label>
+<select ng-model="vehiclesCtrl.vehicle.model">
+    <option value="{{model.model_name}}" ng-repeat="model in selModelCtrl.dados">
+    {{model.model_name}}
+    </option>
+</select>
