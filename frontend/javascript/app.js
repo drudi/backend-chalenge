@@ -11,7 +11,7 @@
             for (var key in params) {
                 if (params.hasOwnProperty(key) && params[key] != '') {
                     if (key === 'vehicle_type') {
-                        query.vehicle_type = params[key];
+                        query.type = params[key];
                     }else if (key === 'manufacturer') {
                         query.manufacturer = params[key];
                     } else if (key === 'model') {
