@@ -379,5 +379,95 @@
         };
     });
 
+    app.directive('modelForm', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/model/form.html',
+            controller: ['$http', function($http){
+                var ctrl = this;
+                ctrl.model = {};
+                ctrl.all = [];
+                this.submitForm = function() {
+
+                    $http.post('http://127.0.0.1:8000/models', ctrl.model)
+                        .success(function(data){
+                            ctrl.all.push(data);
+                            ctrl.model= {};
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+
+                };
+
+                this.listAll = function() {
+                    $http.get('http://127.0.0.1:8000/models')
+                        .success(function(data){
+                            ctrl.all = data;
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+                };
+
+                this.listAll();
+            }],
+            controllerAs: 'modelCtrl',
+        };
+    });
+
+    app.directive('modelEdit', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/model/edit.html',
+            link: function (scope, element, attrs) {
+               if(attrs.model){
+                    scope.model = scrope.$eval(attrs.model);
+                }
+            },
+            controller: ['$http', function($http){
+                var ctrl = this;
+                this.submitForm = function(form) {
+                    $http.patch('http://127.0.0.1:8000/models/'+form.id,
+                            {model_name: form.model_name})
+                        .success(function(data){
+                            ctrl.editing = false;
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+                    this.editing = false;
+
+                };
+            }],
+            controllerAs: 'modelEditCtrl',
+        };
+    });
+
+    app.directive('modelDelete', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'templates/model/delete.html',
+            link: function (scope, element, attrs) {
+               if(attrs.model){
+                    scope.model= scrope.$eval(attrs.model);
+                }
+            },
+            controller: ['$http', function($http){
+                var ctrl = this;
+                this.submitForm = function(form) {
+                    $http.delete('http://127.0.0.1:8000/models/'+form.id)
+                        .success(function(data){
+                            $('#model_'+form.id).hide();
+                        })
+                        .error(function(data){
+                            alert(JSON.stringify(data));
+                        });
+
+                };
+            }],
+            controllerAs: 'modelDeleteCtrl',
+        };
+    });
 
 })();

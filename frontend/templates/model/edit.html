@@ -1,0 +1,9 @@
+<span ng-hide="modelEditCtrl.editing" ng-click="modelEditCtrl.editing = true">
+    {{model.model_name}}
+</span>
+<form ng-show="modelEditCtrl.editing" ng-submit="modelEditCtrl.submitForm(model)">
+    <input name="id" type="hidden" ng-model="model.id" />
+    <input name="model" type="text" ng-model="model.model_name" ng-required />
+    <button class="btn" type="submit">Save</button>
+</form>
+<br />

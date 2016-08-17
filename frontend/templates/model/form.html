@@ -1,0 +1,12 @@
+<form ng-submit="modelCtrl.submitForm()">
+    <label>Nome da Model: </label>
+    <input type="text" ng-model="modelCtrl.model.model_name" />
+    <input class="btn" type="submit" value="Inserir" />
+</form>
+<h3>Lista de Modelos</h3>
+<div ng-repeat="model in modelCtrl.all">
+    <div class="border" id="model_{{model.id}}">
+        <model-edit></model-edit>
+        <model-delete></model-delete>
+    </div>
+</div>
