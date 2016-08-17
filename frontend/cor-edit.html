@@ -1,0 +1,11 @@
+<li>
+    <span ng-hide="editColorCtrl.editing" ng-click="editColorCtrl.editing = true">
+        Cor: {{vehicle.color}}
+    </span>
+    <form ng-show="editColorCtrl.editing" ng-submit="editColorCtrl.submitForm(vehicle)">
+        <input name="id" type="hidden" ng-model="vehicle.id" />
+        <input name="kms" type="text" ng-model="vehicle.color" ng-required />
+        <button class="btn" type="submit">Save</button>
+    </form>
+    <br />
+</li>

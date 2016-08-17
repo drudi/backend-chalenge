@@ -1,0 +1,9 @@
+<span ng-hide="editMontadoraCtrl.editing" ng-click="editMontadoraCtrl.editing = true">
+    Montadora: {{vehicle.manufacturer}}
+</span>
+<form ng-show="editMontadoraCtrl.editing" ng-submit="editMontadoraCtrl.submitForm(vehicle)">
+    <input name="id" type="hidden" ng-model="vehicle.id" />
+    <input name="manufacturer" type="text" ng-model="vehicle.manufacturer" ng-required />
+    <button class="btn" type="submit">Save</button>
+</form>
+<br />

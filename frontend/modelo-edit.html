@@ -1,0 +1,11 @@
+<li>
+    <span ng-hide="editModelCtrl.editing" ng-click="editModelCtrl.editing = true">
+        Modelo: {{vehicle.model}}
+    </span>
+    <form ng-show="editModelCtrl.editing" ng-submit="editModelCtrl.submitForm(vehicle)">
+        <input name="id" type="hidden" ng-model="vehicle.id" />
+        <input name="kms" type="text" ng-model="vehicle.model" ng-required />
+        <button class="btn" type="submit">Save</button>
+    </form>
+    <br />
+</li>

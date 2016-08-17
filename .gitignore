@@ -2,3 +2,5 @@ env
 *.swp
 __pycache__/
 .coverage
+.DS_Store
+.data

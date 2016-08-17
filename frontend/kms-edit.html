@@ -1,0 +1,9 @@
+<span ng-hide="editKmsCtrl.editing" ng-click="editKmsCtrl.editing = true">
+    Kilometragem: {{vehicle.kms}}
+</span>
+<form ng-show="editKmsCtrl.editing" ng-submit="editKmsCtrl.submitForm(vehicle)">
+    <input name="id" type="hidden" ng-model="vehicle.id" />
+    <input name="kms" type="text" ng-model="vehicle.kms" ng-required />
+    <button class="btn" type="submit">Save</button>
+</form>
+<br />

@@ -1,0 +1,11 @@
+<li>
+    <span ng-hide="editEngineCtrl.editing" ng-click="editEngineCtrl.editing = true">
+        Motor: {{vehicle.engine}}
+    </span>
+    <form ng-show="editEngineCtrl.editing" ng-submit="editEngineCtrl.submitForm(vehicle)">
+        <input name="id" type="hidden" ng-model="vehicle.id" />
+        <input name="kms" type="text" ng-model="vehicle.engine" ng-required />
+        <button class="btn" type="submit">Save</button>
+    </form>
+    <br />
+</li>
